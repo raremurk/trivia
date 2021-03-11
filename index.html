@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>How many time zones are there in Russia?</h3>
+                <div>
+                    <h4 id="message1" class="answer-res">Message</h4>
+                    <button class="fix-sz-btn">8</button>
+                    <button class="fix-sz-btn">9</button>
+                    <button class="fix-sz-btn">10</button>
+                    <button class="fix-sz-btn">11</button>
+                    <button class="fix-sz-btn">12</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>How many days does it take for the Earth to orbit the Sun?</h3>
+                <div>
+                    <h4 id="message2" class="answer-res">Message</h4>
+                    <input id="answer" type="text" placeholder="Your answer" autocomplete="off">
+                    <button id="submit">Check Answer</button>
+                </div>
+            </div>
+        </div>
+		<script>
+		function blinkObjectColor(object, color, orig_color, time) {
+			object.style.backgroundColor = color;
+			setTimeout(function() { object.style.backgroundColor = orig_color; }, time);
+		}
+
+		function blinkMessage(object_id, text, color, time) {
+			let message = document.querySelector(object_id);
+			message.textContent = text;
+			message.style.color = color;
+			message.style.visibility = 'visible';
+			setTimeout(function() { message.style.visibility = 'hidden'; }, time);
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			var buttons = document.querySelectorAll('.fix-sz-btn');
+			for (let i = 0; i < buttons.length; i++){
+				buttons[i].addEventListener('click', function() {
+				if (buttons[i].textContent == 11){
+					blinkMessage('#message1', 'Correct!', '#00c097', 2000);
+					blinkObjectColor(buttons[i], '#00c097', '#d9edff', 2000);
+				}
+				else{
+					blinkMessage('#message1', 'Incorrect', '#ff3a43', 2000);
+					blinkObjectColor(buttons[i], '#ff3a43', '#d9edff', 2000);
+				}
+				});
+			}
+		});
+
+		document.addEventListener('DOMContentLoaded', function() {
+			document.querySelector('#submit').addEventListener('click', function() {
+			let answer = document.querySelector('#answer');
+			if (answer.value == 365){
+				blinkMessage('#message2', 'Correct!', '#00c097', 2000);
+				blinkObjectColor(answer, '#acf9e8', 'white', 2000);
+			}
+			else{
+				blinkMessage('#message2', 'Incorrect', '#ff3a43', 2000);
+				blinkObjectColor(answer, '#f9c1c3', 'white', 2000);
+			}
+			});
+		});
+		</script>		
+    </body>
+</html>
